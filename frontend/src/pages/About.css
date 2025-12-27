@@ -1,0 +1,126 @@
+.about-wrapper {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* HERO SECTION */
+.about-hero {
+  background: linear-gradient(
+      rgba(11, 59, 46, 0.7),
+      rgba(11, 59, 46, 0.85)
+    ),
+  url("/About/About_banner.png");
+  background-size: cover;
+  background-position: center;
+  padding: 120px 20px;
+  text-align: center;
+  color: #fff;
+}
+
+.about-hero h1 {
+  font-size: 44px;
+  font-weight: 700;
+}
+
+.about-hero p {
+  font-size: 18px;
+  margin-top: 16px;
+  max-width: 760px;
+  margin-inline: auto;
+  opacity: 0.95;
+  line-height: 1.6;
+}
+
+/* INFO SECTIONS */
+.info-section {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  padding: 80px 10%;
+}
+
+.info-section.reverse {
+  flex-direction: row-reverse;
+}
+
+.info-image img {
+  width: 100%;
+  max-width: 440px;
+  border-radius: 14px;
+  box-shadow: 0 6px 22px rgba(0,0,0,0.15);
+}
+
+.info-text {
+  max-width: 560px;
+}
+
+.info-text h2 {
+  font-size: 32px;
+  color: var(--green);
+  margin-bottom: 14px;
+}
+
+.info-text p {
+  font-size: 17px;
+  opacity: 0.85;
+  line-height: 1.75;
+  margin-bottom: 14px;
+}
+
+/* CORE VALUES */
+.values-section {
+  padding: 70px 10%;
+  text-align: center;
+  background: #f6fbf8;
+}
+
+.values-section h2 {
+  font-size: 32px;
+  color: var(--green);
+  margin-bottom: 35px;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 24px;
+}
+
+.value-card {
+  background: #fff;
+  padding: 26px;
+  border-radius: 14px;
+  border: 1px solid #eee;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  transition: 0.3s;
+}
+
+.value-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--green);
+}
+
+.value-card h3 {
+  color: var(--green);
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.value-card p {
+  font-size: 15px;
+  opacity: 0.8;
+  line-height: 1.6;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .info-section {
+    flex-direction: column;
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .info-section.reverse {
+    flex-direction: column;
+  }
+}
