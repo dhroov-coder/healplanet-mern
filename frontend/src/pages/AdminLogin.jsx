@@ -2,6 +2,8 @@
 import { useState } from "react";
 import axios from "axios";
 
+const API = import.meta.env.VITE_API_BASE_URL;
+
 function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -10,7 +12,11 @@ function AdminLogin() {
   const submit = async () => {
     try {
       setLoading(true);
-      const res = await axios.post("http://localhost:5000/api/admin/login", { email, password });
+      const res = await axios.post(
+       `${API}/api/admin/login`,
+        { email, password }
+      );
+
       localStorage.setItem("adminToken", res.data.token);
       localStorage.setItem("adminInfo", JSON.stringify(res.data.admin));
       alert("Admin logged in");

@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+const API = import.meta.env.VITE_API_BASE_URL;
+
 export default function AdminDashboard() {
   const [counts, setCounts] = useState({ products: 0, enquiries: 0 });
 
   useEffect(() => {
     const token = localStorage.getItem("adminToken");
     axios
-      .get("http://localhost:5000/api/admin/stats", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+     .get(`${API}/api/admin/stats`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
       .then((res) => setCounts(res.data))
       .catch(() => {});
   }, []);

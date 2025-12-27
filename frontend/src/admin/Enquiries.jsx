@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+const API = import.meta.env.VITE_API_BASE_URL;
+
 export default function Enquiries() {
   const [items, setItems] = useState([]);
   const isMobile = window.innerWidth < 768;
@@ -9,9 +11,10 @@ export default function Enquiries() {
     const token = localStorage.getItem("adminToken");
 
     axios
-      .get("http://localhost:5000/api/admin/enquiries", {
-        headers: { Authorization: `Bearer ${token}` },
+      .get(`${API}/api/admin/enquiries`, {
+       headers: { Authorization: `Bearer ${token}` },
       })
+
       .then((res) => setItems(res.data))
       .catch((err) => console.log(err));
   }, []);

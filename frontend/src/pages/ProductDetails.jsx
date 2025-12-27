@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+const API = import.meta.env.VITE_API_BASE_URL;
+
 function ProductDetails() {
   const { slug } = useParams();
   const [product, setProduct] = useState(null);
@@ -18,17 +20,18 @@ function ProductDetails() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/products/${slug}`)
+     .get(`${API}/api/products/${slug}`)
+
       .then((res) => setProduct(res.data))
       .catch((err) => console.log(err));
   }, [slug]);
 
   const handleSubmit = () => {
-    axios
-      .post("http://localhost:5000/api/contact", {
-        ...form,
-        product: product.name,
-      })
+   axios
+     .post(`${API}/api/contact`, {
+      ...form,
+      product: product.name,
+  })
       .then(() => {
         alert("Your enquiry has been submitted!");
         setShowModal(false);

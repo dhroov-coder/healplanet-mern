@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import "./Contact.css";
 
+const API = import.meta.env.VITE_API_BASE_URL;
+
 export default function Contact() {
   const [form, setForm] = useState({
     name: "",
@@ -23,7 +25,7 @@ export default function Contact() {
       return;
     }
 
-    await axios.post("http://localhost:5000/api/contact", form);
+    await axios.post(`${API}/api/contact`, form);
     alert("Enquiry sent successfully!");
 
     setForm({

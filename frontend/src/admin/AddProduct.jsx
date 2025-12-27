@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 
+const API = import.meta.env.VITE_API_BASE_URL;
+
 export default function AddProduct() {
   const [name, setName] = useState("");
   const [slug, setSlug] = useState("");
@@ -34,15 +36,15 @@ export default function AddProduct() {
       const token = localStorage.getItem("adminToken");
 
       const res = await axios.post(
-        "http://localhost:5000/api/admin/upload-images",
-        formData,
+        `${API}/api/admin/upload-images`,
+         formData,
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+         headers: {
+         Authorization: `Bearer ${token}`,
+         "Content-Type": "multipart/form-data",
+        },
+      }
+    );
 
       if (res.data.success) {
         setImages(res.data.urls);
@@ -67,10 +69,11 @@ export default function AddProduct() {
     const token = localStorage.getItem("adminToken");
 
     await axios.post(
-      "http://localhost:5000/api/admin/products",
+     `${API}/api/admin/products`,
       { name, slug, category, description, images },
       { headers: { Authorization: `Bearer ${token}` } }
-    );
+     );
+
 
     alert("Product created successfully!");
 

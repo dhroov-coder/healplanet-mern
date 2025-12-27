@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Edit, Trash2, Search } from "lucide-react";
 
+const API = import.meta.env.VITE_API_BASE_URL;
+
+
 export default function AdminProducts() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,9 +16,10 @@ export default function AdminProducts() {
     const token = localStorage.getItem("adminToken");
 
     axios
-      .get("http://localhost:5000/api/admin/products", {
-        headers: { Authorization: `Bearer ${token}` },
+      .get(`${API}/api/admin/products`, {
+       headers: { Authorization: `Bearer ${token}` },
       })
+
       .then((res) => setProducts(res.data))
       .finally(() => setLoading(false));
   }, []);
@@ -25,9 +29,10 @@ export default function AdminProducts() {
 
     const token = localStorage.getItem("adminToken");
 
-    await axios.delete(`http://localhost:5000/api/admin/products/${id}`, {
+    await axios.delete(`${API}/api/admin/products/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
+
 
     setProducts(products.filter((p) => p._id !== id));
   };

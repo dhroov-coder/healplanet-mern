@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+const API = import.meta.env.VITE_API_BASE_URL;
+
+
 function Products() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/products")
+    axios.get(`${API}/api/products`)
+
       .then(res => setProducts(res.data))
       .catch(err => console.log(err));
   }, []);

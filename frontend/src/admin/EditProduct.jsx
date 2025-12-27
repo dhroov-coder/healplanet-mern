@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 
+const API = import.meta.env.VITE_API_BASE_URL;
+
 export default function EditProduct() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -30,7 +32,8 @@ export default function EditProduct() {
    ------------------------------ */
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/products/id/${id}`)
+      .get(`${API}/api/products/id/${id}`)
+
       .then((res) => {
         const p = res.data;
         setName(p.name);
@@ -64,15 +67,16 @@ export default function EditProduct() {
     const token = localStorage.getItem("adminToken");
 
     const res = await axios.post(
-      "http://localhost:5000/api/admin/upload-images",
-      formData,
+      `${API}/api/admin/upload-images`,
+       formData,
       {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
+       headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${token}`,
         },
       }
     );
+
 
     if (res.data.success) {
       const updated = [...images, ...res.data.urls];
@@ -107,7 +111,8 @@ export default function EditProduct() {
     const token = localStorage.getItem("adminToken");
 
     await axios.put(
-      `http://localhost:5000/api/admin/products/${id}`,
+      `${API}/api/admin/products/${id}`,
+
       {
         name,
         slug,
