@@ -31,7 +31,7 @@ function Products() {
        {products.map((p) => (
   <Link
     key={p._id}
-    to={`/products/${p.category}`}
+    to={`/product/${p.slug}`}
     style={{ textDecoration: "none", color: "inherit" }}
   >
     <div
