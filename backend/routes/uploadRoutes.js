@@ -10,19 +10,16 @@ router.post(
   upload.array("images", 10),
   (req, res) => {
     try {
-      if (!req.files || req.files.length === 0) {
+      if (!req.files?.length) {
         return res.status(400).json({ success: false });
       }
 
-      // ✅ multer-storage-cloudinary already uploaded
+      // ✅ DIRECT URL from multer-storage-cloudinary
       const urls = req.files.map(file => file.path);
 
-      res.json({
-        success: true,
-        urls,
-      });
+      res.json({ success: true, urls });
     } catch (err) {
-      console.error("UPLOAD ERROR:", err);
+      console.error(err);
       res.status(500).json({ success: false });
     }
   }
