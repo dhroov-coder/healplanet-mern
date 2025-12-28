@@ -1,6 +1,5 @@
 import express from "express";
 import upload from "../middleware/upload.js";
-import cloudinary from "../config/cloudinaryConfig.js";
 import { adminAuth } from "../middleware/auth.js";
 
 const router = express.Router();
@@ -14,27 +13,14 @@ router.post(
       if (!req.files || req.files.length === 0) {
         return res.status(400).json({
           success: false,
-          message: "No images received",
+          message: "No images uploaded",
         });
       }
 
-      const urls = [];
+      // 🔥 multer-storage-cloudinary already uploaded
+      const urls = req.files.map(file => file.path);
 
-      for (const file of req.files) {
-        const result = await new Promise((resolve, reject) => {
-          cloudinary.uploader.upload_stream(
-            { folder: "healplanet/products" },
-            (err, result) => {
-              if (err) reject(err);
-              else resolve(result);
-            }
-          ).end(file.buffer);
-        });
-
-        urls.push(result.secure_url);
-      }
-
-      res.json({
+      return res.json({
         success: true,
         urls,
       });
