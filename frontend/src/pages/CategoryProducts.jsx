@@ -6,11 +6,12 @@ const API = import.meta.env.VITE_API_BASE_URL;
 
 function CategoryProducts() {
   const { category } = useParams();
+  const safeCategory = category.toLowerCase();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     axios
-     .get(`${API}/api/products?category=${category}`)
+     .get(`${API}/api/products?category=${safeCategory}`)
       .then((res) => setProducts(res.data))
       .catch((err) => console.log(err));
   }, [category]);
