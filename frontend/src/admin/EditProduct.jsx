@@ -78,7 +78,7 @@ export default function EditProduct() {
     );
 
 
-    if (res.data.success) {
+    if (res.data.urls && res.data.urls.length > 0) {
       const updated = [...images, ...res.data.urls];
       setImages(updated);
       setPreview(updated);

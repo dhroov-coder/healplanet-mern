@@ -46,7 +46,7 @@ export default function AddProduct() {
       }
     );
 
-      if (res.data.success) {
+      if (res.data.urls && res.data.urls.length > 0) { 
         setImages(res.data.urls);
         setPreview(res.data.urls);
       } else {
