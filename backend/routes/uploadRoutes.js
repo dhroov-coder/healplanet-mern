@@ -7,17 +7,29 @@ const router = express.Router();
 router.post(
   "/upload-images",
   adminAuth,
-  upload.array("images", 5),
   (req, res) => {
-    if (!req.files || req.files.length === 0) {
-      return res.status(400).json({ success: false });
-    }
+    upload.array("images", 5)(req, res, (err) => {
+      if (err) {
+        console.error("UPLOAD ERROR:", err);
+        return res.status(400).json({
+          success: false,
+          message: err.message || "Upload failed",
+        });
+      }
 
-    const urls = req.files.map(file => file.path);
+      if (!req.files || req.files.length === 0) {
+        return res.status(400).json({
+          success: false,
+          message: "No files received",
+        });
+      }
 
-    res.json({
-      success: true,
-      urls,
+      const urls = req.files.map((file) => file.path);
+
+      res.json({
+        success: true,
+        urls,
+      });
     });
   }
 );
