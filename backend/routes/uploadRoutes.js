@@ -6,7 +6,6 @@ const router = express.Router();
 
 router.post(
   "/upload-images",
-  adminAuth,
   upload.array("images", 10),
   async (req, res) => {
     try {
