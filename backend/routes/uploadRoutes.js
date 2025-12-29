@@ -8,19 +8,29 @@ router.post(
   "/upload-images",
   adminAuth,
   upload.array("images", 10),
-  (req, res) => {
+  async (req, res) => {
     try {
-      if (!req.files?.length) {
-        return res.status(400).json({ success: false });
+      if (!req.files || req.files.length === 0) {
+        return res.status(400).json({
+          success: false,
+          message: "No images uploaded",
+        });
       }
 
-      // ✅ DIRECT URL from multer-storage-cloudinary
+      // ✅ CloudinaryStorage already uploaded images
       const urls = req.files.map(file => file.path);
 
-      res.json({ success: true, urls });
+      return res.json({
+        success: true,
+        urls,
+      });
+
     } catch (err) {
-      console.error(err);
-      res.status(500).json({ success: false });
+      console.error("UPLOAD ERROR:", err);
+      res.status(500).json({
+        success: false,
+        message: "Image upload failed",
+      });
     }
   }
 );
