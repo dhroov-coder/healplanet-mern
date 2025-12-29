@@ -4,6 +4,7 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import connectDB from "./config/db.js";
+
 import productRoutes from "./routes/productRoutes.js";
 import contactRouter from "./routes/contactRoutes.js";
 import adminAuth from "./routes/adminAuth.js";
@@ -22,34 +23,48 @@ connectDB();
 
 const app = express();
 
-app.use("/api/admin", uploadRoutes);
+/* =======================
+   ✅ CORS MUST BE FIRST
+======================= */
+app.use(
+  cors({
+    origin: [
+      "https://healplanet-mern.vercel.app",
+      "http://localhost:5173",
+    ],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
+// 🔥 VERY IMPORTANT
+app.options("*", cors());
+
+/* =======================
+   ✅ BODY PARSER
+======================= */
 app.use(express.json());
-app.use(cors({
-  origin: [
-    "https://healplanet-mern.vercel.app",
-    "http://localhost:5173"
-  ],
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
 
-
-app.use("/api/products", productRoutes);
-app.use("/api/contact", contactRouter);
+/* =======================
+   ✅ ROUTES
+======================= */
+app.use("/api/admin", uploadRoutes);
 app.use("/api/admin", adminAuth);
 app.use("/api/admin", adminProducts);
 app.use("/api/admin", adminEnquiries);
 
+app.use("/api/products", productRoutes);
+app.use("/api/contact", contactRouter);
 
-// test route
+/* =======================
+   TEST
+======================= */
 app.get("/", (req, res) => {
   res.send("Backend running...");
 });
 
 const PORT = process.env.PORT || 5000;
-
 app.listen(PORT, () => {
   console.log("Server running on port", PORT);
 });
