@@ -36,14 +36,16 @@ export default function AddProduct() {
       const token = localStorage.getItem("adminToken");
 
       const res = await axios.post(
-        `${API}/api/admin/upload-images`,
-         formData,
-        {
-         headers: {
-         Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+  `${API}/api/admin/upload-images`,
+  formData,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  }
+);
+
 
       if (res.data.urls && res.data.urls.length > 0) { 
         setImages(res.data.urls);
@@ -51,9 +53,11 @@ export default function AddProduct() {
       } else {
         alert("Image upload failed");
       }
-    } catch {
-      alert("Image upload failed");
-    } finally {
+    } catch (err) {
+  console.error("UPLOAD ERROR:", err.response?.data || err.message);
+  alert("Image upload failed");
+}
+finally {
       setLoading(false);
     }
   };
