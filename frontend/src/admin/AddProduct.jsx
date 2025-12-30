@@ -147,14 +147,8 @@ finally {
           )}
 
           {/* IMAGE GRID */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(80px, 1fr))",
-              gap: "10px",
-              marginTop: "15px",
-            }}
-          >
+          <div className="image-grid">
+
             {preview.map((img, i) => (
               <img
                 key={i}
