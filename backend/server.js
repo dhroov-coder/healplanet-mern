@@ -1,4 +1,4 @@
-// 🔥 MUST BE FIRST
+// MUST BE FIRST
 import "dotenv/config";
 
 import express from "express";
@@ -16,25 +16,29 @@ connectDB();
 
 const app = express();
 
-/* =======================
-   ✅ CORS (NO WILDCARD)
-======================= */
-app.use(cors({
-  origin: [
-    "https://healplanet-mern.vercel.app",
-    "http://localhost:5173",
-  ],
-  credentials: true,
-}));
+/* ======================
+   CORS (NO WILDCARD)
+====================== */
+app.use(
+  cors({
+    origin: [
+      "https://healplanet-mern.vercel.app",
+      "http://localhost:5173",
+    ],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
-/* =======================
+/* ======================
    BODY PARSER
-======================= */
+====================== */
 app.use(express.json());
 
-/* =======================
+/* ======================
    ROUTES
-======================= */
+====================== */
 app.use("/api/admin", uploadRoutes);
 app.use("/api/admin", adminAuth);
 app.use("/api/admin", adminProducts);
@@ -43,9 +47,9 @@ app.use("/api/admin", adminEnquiries);
 app.use("/api/products", productRoutes);
 app.use("/api/contact", contactRouter);
 
-/* =======================
+/* ======================
    TEST
-======================= */
+====================== */
 app.get("/", (req, res) => {
   res.send("Backend running...");
 });
