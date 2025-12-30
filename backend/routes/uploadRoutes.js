@@ -7,13 +7,13 @@ const router = express.Router();
 router.post(
   "/upload-images",
 
-  // ✅ 1. FIRST multer
-  upload.array("images", 5),
-
-  // ✅ 2. THEN auth
+  // ✅ STEP 1: auth FIRST
   adminAuth,
 
-  // ✅ 3. THEN controller
+  // ✅ STEP 2: upload AFTER auth
+  upload.array("images", 5),
+
+  // ✅ STEP 3: controller
   (req, res) => {
     if (!req.files || req.files.length === 0) {
       return res.status(400).json({
