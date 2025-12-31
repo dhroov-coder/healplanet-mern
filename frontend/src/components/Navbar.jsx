@@ -8,7 +8,7 @@ function Navbar() {
   return (
     <nav className="nav">
       <Link to="/" className="nav-logo">
-        🌱🌍 HealPlanet
+       🌍 HealPlanet
       </Link>
 
       <button className="nav-toggle" onClick={() => setOpen(!open)}>
