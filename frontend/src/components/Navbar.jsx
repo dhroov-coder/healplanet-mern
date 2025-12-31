@@ -8,7 +8,7 @@ function Navbar() {
   return (
     <nav className="nav">
       <Link to="/" className="nav-logo">
-        🌱 HealPlanet
+        🌱🌍 HealPlanet
       </Link>
 
       <button className="nav-toggle" onClick={() => setOpen(!open)}>
@@ -25,7 +25,7 @@ function Navbar() {
 
         {/* 🔽 DOWNLOAD (ALWAYS LAST) */}
         <a
-          href="/Navbar/HealPlanet_Catalogue_Cleaned.pdf"
+          href="/Navbar/HealPlanetInternationalQR.pdf"
           download
           className="nav-download"
           onClick={() => setOpen(false)}
