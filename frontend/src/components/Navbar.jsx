@@ -25,7 +25,7 @@ function Navbar() {
 
         {/* 🔽 DOWNLOAD (ALWAYS LAST) */}
         <a
-          href="/Navbar/HealPlanetInternationalCatalogueQR.pdf"
+          href="/Navbar/HealPlanetInternationalQR.pdf"
           download
           className="nav-download"
           onClick={() => setOpen(false)}
