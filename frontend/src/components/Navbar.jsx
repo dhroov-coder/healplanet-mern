@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import "./Navbar.css";
+import logo from "../assets/healplanet-logo.png";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
@@ -8,7 +9,7 @@ function Navbar() {
   return (
     <nav className="nav">
       <Link to="/" className="nav-logo">
-       🌍 HealPlanet
+       <img src={logo} alt="HealPlanet International" />
       </Link>
 
       <button className="nav-toggle" onClick={() => setOpen(!open)}>

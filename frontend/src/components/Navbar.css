@@ -15,6 +15,26 @@
   font-weight: 600;
 }
 
+.nav-logo {
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo img {
+  height: 64px;
+  width: auto;
+  object-fit: contain;
+
+  /* 🔥 remove any box feel */
+  background: transparent;
+  padding: 0;
+  
+  /* soft premium glow */
+  filter: drop-shadow(0 0 6px rgba(180, 255, 220, 0.35));
+}
+
+
+
 .nav-links {
   display: flex;
   gap: 22px;
@@ -71,3 +91,4 @@
   opacity: 1;
   text-decoration: underline;
 }
+
