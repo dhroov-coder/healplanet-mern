@@ -54,27 +54,27 @@ export default function Home() {
             {
               name: "Tableware",
               link: "/products/tableware",
-              img: "https://res.cloudinary.com/duroecr2t/image/upload/v1766424880/Tableware_category_lpkc9w.png"
+              img: "https://res.cloudinary.com/duroecr2t/image/upload/v1767792297/Tableware_category_1_uqulkt.png"
             },
             {
               name: "Toilet Roll",
               link: "/products/toilet-roll",
-              img: "https://res.cloudinary.com/duroecr2t/image/upload/v1766424881/Toilet_paper_category_ukhhau.png"
+              img: "https://res.cloudinary.com/duroecr2t/image/upload/v1767792297/Toilet_paper_category_1_lhtcth.png"
             },
             {
               name: "Napkins",
               link: "/products/napkins",
-              img: "https://res.cloudinary.com/duroecr2t/image/upload/v1766424880/Napkins_category_o79vvf.png"
+              img: "https://res.cloudinary.com/duroecr2t/image/upload/v1767792297/Napkins_category_1_h6l1m8.png"
             },
             {
               name: "Tissues",
               link: "/products/tissues",
-              img: "https://res.cloudinary.com/duroecr2t/image/upload/v1766424881/Tissues_category_tc4skr.png"
+              img: "https://res.cloudinary.com/duroecr2t/image/upload/v1767792298/Tissues_category_1_tucz0g.png"
             },
             {
               name: "Kitchen Towel",
               link: "/products/kitchen-towel",
-              img: "https://res.cloudinary.com/duroecr2t/image/upload/v1766424879/kitchentowel_category_xx54tc.png"
+              img: "https://res.cloudinary.com/duroecr2t/image/upload/v1767792297/kitchentowel_category_1_gf95yi.png"
             }
           ].map((c, i) => (
             <Link key={i} to={c.link} className="category-card">
