@@ -1,21 +1,22 @@
 import nodemailer from "nodemailer";
 
-const sendEmail = async ({ email, subject, text }) => {
-  const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,          // 🔥 CHANGE
-    secure: false,      // 🔥 IMPORTANT
-    auth: {
-      user: process.env.EMAIL_USERNAME,
-      pass: process.env.EMAIL_PASSWORD, // Gmail App Password
-    },
-  });
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
+  auth: {
+    user: process.env.EMAIL_USERNAME,
+    pass: process.env.EMAIL_PASSWORD,
+  },
+});
 
+const sendEmail = async ({ to, subject, text, html }) => {
   await transporter.sendMail({
-    from: `"HealPlanet" <${process.env.EMAIL_USERNAME}>`,
-    to: email,
+    from: `"HealPlanet International" <${process.env.EMAIL_USERNAME}>`,
+    to,
     subject,
     text,
+    html,
   });
 };
 

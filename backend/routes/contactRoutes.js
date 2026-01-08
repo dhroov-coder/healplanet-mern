@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
 
     // 3️⃣ SEND EMAILS IN BACKGROUND (no await)
     sendEmail({
-      email: "info@healplanetinternational.org",
+      to: "info@healplanetinternational.org",
       subject: `New Quote Request for ${product || "a product"}`,
       text: `New Quote Request:
 
@@ -39,19 +39,22 @@ Message:
 ${message}`
     });
 
-    // 4️⃣ CLIENT THANK YOU MAIL ✅
-    sendEmail({
-      to: email,
-      subject: `Thanks for your enquiry about ${product || "our products"}`,
-      html: `
-        <h2>Thank you ${name} </h2>
-        <p>We have received your enquiry.</p>
-        <p>Our team will contact you shortly.</p>
-        <br/>
-        <b>HealPlanet International</b><br/>
-        Built for the Earth. Chosen by the World.
-      `,
-    });
+    setTimeout(() => {
+  sendEmail({
+    to: email,
+    subject: `Thanks for your enquiry about ${product || "our products"}`,
+    html: `
+      <h2>Hello ${name} </h2>
+      <p>We have received your enquiry.</p>
+      <p>Our team will contact you shortly.</p>
+      <br/>Regards,
+      <br/>
+      <b>HealPlanet International</b><br/>
+      Built for the Earth. Chosen by the World.
+    `,
+  });
+}, 1500);
+
 
   } catch (err) {
     console.error("Contact error:", err);
