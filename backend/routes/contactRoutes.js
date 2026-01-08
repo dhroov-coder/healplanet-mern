@@ -7,7 +7,7 @@ const router = express.Router();
 router.get("/test-client-mail", async (req, res) => {
   try {
     await sendEmail({
-      to: "YOUR_PERSONAL_EMAIL@gmail.com",
+      to: "vermadhroov1@gmail.com",
       subject: "CLIENT MAIL TEST",
       html: "<h1>If you see this, client mail works</h1>",
     });
