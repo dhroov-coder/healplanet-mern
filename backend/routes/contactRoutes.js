@@ -39,16 +39,18 @@ Message:
 ${message}`
     });
 
+    // 4️⃣ CLIENT THANK YOU MAIL ✅
     sendEmail({
-      email,
+      to: email,
       subject: `Thanks for your enquiry about ${product || "our products"}`,
-      text: `Hello ${name},
-
-Thanks for contacting HealPlanet International.
-We have received your enquiry and our team will contact you shortly.
-
-Regards,
-HealPlanet International`
+      html: `
+        <h2>Thank you ${name} </h2>
+        <p>We have received your enquiry.</p>
+        <p>Our team will contact you shortly.</p>
+        <br/>
+        <b>HealPlanet International</b><br/>
+        Built for the Earth. Chosen by the World.
+      `,
     });
 
   } catch (err) {
