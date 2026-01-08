@@ -1,22 +1,14 @@
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
-  auth: {
-    user: process.env.EMAIL_USERNAME,
-    pass: process.env.EMAIL_PASSWORD,
-  },
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-const sendEmail = async ({ to, subject, text, html }) => {
-  await transporter.sendMail({
-    from: `"HealPlanet International" <${process.env.EMAIL_USERNAME}>`,
+const sendEmail = async ({ to, subject, html, text }) => {
+  return await resend.emails.send({
+    from: "HealPlanet <info@healplanetinternational.org>", // verified sender
     to,
     subject,
-    text,
     html,
+    text,
   });
 };
 
