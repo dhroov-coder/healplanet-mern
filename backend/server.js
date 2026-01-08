@@ -54,6 +54,14 @@ app.get("/", (req, res) => {
   res.send("Backend running...");
 });
 
+/* ======================
+   PING (KEEP ALIVE)
+====================== */
+app.get("/ping", (req, res) => {
+  res.status(200).send("Server awake 🚀");
+});
+
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log("Server running on port", PORT);
