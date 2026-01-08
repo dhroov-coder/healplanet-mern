@@ -4,6 +4,24 @@ import Enquiry from "../models/Enquiry.js";
 
 const router = express.Router();
 
+router.get("/test-client-mail", async (req, res) => {
+  try {
+    await sendEmail({
+      to: "YOUR_PERSONAL_EMAIL@gmail.com",
+      subject: "CLIENT MAIL TEST",
+      html: "<h1>If you see this, client mail works</h1>",
+    });
+
+    res.send("CLIENT MAIL SENT");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("FAILED");
+  }
+});
+
+
+
+
 router.post("/", async (req, res) => {
   try {
     const { name, email, company, country, quantity, message, product } = req.body;
