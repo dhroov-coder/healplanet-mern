@@ -12,26 +12,43 @@ import uploadRoutes from "./routes/uploadRoutes.js";
 import adminProducts from "./routes/adminProducts.js";
 import adminEnquiries from "./routes/adminEnquiries.js";
 
-connectDB();
-
 const app = express();
 
 /* ======================
-   CORS (NO WILDCARD)
+   DATABASE
 ====================== */
+connectDB();
+
+/* ======================
+   CORS (FINAL FIX)
+====================== */
+const allowedOrigins = [
+  "https://healplanetinternational.org",
+  "https://www.healplanetinternational.org",
+  "https://healplanet-mern.vercel.app",
+  "http://localhost:5173",
+];
+
 app.use(
   cors({
-    origin: [
-      "https://healplanetinternational.org",
-      "https://www.healplanetinternational.org",
-      "https://healplanet-mern.vercel.app",
-      "http://localhost:5173",
-    ],
+    origin: function (origin, callback) {
+      // allow server-to-server & tools like Postman
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+
+// 🔥 VERY IMPORTANT – preflight request fix
+app.options("*", cors());
 
 /* ======================
    BODY PARSER
@@ -50,20 +67,19 @@ app.use("/api/products", productRoutes);
 app.use("/api/contact", contactRouter);
 
 /* ======================
-   TEST
+   HEALTH CHECK
 ====================== */
 app.get("/", (req, res) => {
   res.send("Backend running...");
 });
 
-/* ======================
-   PING (KEEP ALIVE)
-====================== */
 app.get("/ping", (req, res) => {
   res.status(200).send("Server awake 🚀");
 });
 
-
+/* ======================
+   SERVER
+====================== */
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log("Server running on port", PORT);
