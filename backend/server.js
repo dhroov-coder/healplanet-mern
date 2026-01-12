@@ -20,7 +20,7 @@ const app = express();
 connectDB();
 
 /* ======================
-   CORS (FINAL FIX)
+   CORS (EXPRESS 5 SAFE)
 ====================== */
 const allowedOrigins = [
   "https://healplanetinternational.org",
@@ -31,24 +31,21 @@ const allowedOrigins = [
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // allow server-to-server & tools like Postman
+    origin: (origin, callback) => {
+      // allow server-to-server & Postman
       if (!origin) return callback(null, true);
 
       if (allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
+        return callback(null, true);
       }
+
+      return callback(new Error("CORS not allowed"));
     },
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-
-// 🔥 VERY IMPORTANT – preflight request fix
-app.options("*", cors());
 
 /* ======================
    BODY PARSER
