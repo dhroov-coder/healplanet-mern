@@ -22,6 +22,8 @@ const app = express();
 app.use(
   cors({
     origin: [
+      "https://healplanetinternational.org",
+      "https://www.healplanetinternational.org",
       "https://healplanet-mern.vercel.app",
       "http://localhost:5173",
     ],
